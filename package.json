@@ -1,12 +1,17 @@
 {
   "name": "jasmine-node-integration",
   "main": "app/js/index.js",
+  "scripts": {
+    "start": "node ./tests/js/runner.js"
+  },
   "dependencies": {
     "connect": "2.7.9"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-contrib-watch": "~0.5.3",
-    "grunt-contrib-coffee": "~0.7.0"
+    "grunt-contrib-coffee": "~0.7.0",
+    "jasmine-node": "",
+    "grunt-exec": "~0.4.3"
   }
 }

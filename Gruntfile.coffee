@@ -2,24 +2,12 @@ module.exports = (grunt) ->
   
     # Project configuration.
     grunt.initConfig
-        nodemon: 
-            dev:
-                options:
-                    file: 'app/js/index.js'
-                    ignoredFiles: ["node_modules/**"]
-                    legacyWatch: true
-
-        concurrent:
-            dev:
-                tasks: ['watch:coffee', 'nodemon', 'watch:js']
-                options:
-                    logConcurrentOutput: true
         watch:
             coffee:
-                files: ['app/coffee/**.coffee']
-                tasks: ['coffee-compile']
+                files: ['tests/coffee/**.coffee']
+                tasks: ['coffee-compile', "start-tests"]
             js:
-                files: ['app/js/**.js']
+                files: ['tests/js/**.js']
                 options:
                     livereload: true
 
@@ -30,19 +18,25 @@ module.exports = (grunt) ->
                 }
                 files: [
                     expand: true,
-                    cwd: 'app/coffee',
+                    cwd: 'tests/coffee',
                     src: ['**/*.coffee'],
-                    dest: 'app/js/',
+                    dest: 'tests/js/',
                     ext: '.js'
                 ]
+
+        exec:
+            start_tests:
+                command: 'npm start'
+                stdout: true
+                stderr: true
 
 
     grunt.loadNpmTasks "grunt-contrib-watch"
     grunt.loadNpmTasks "grunt-contrib-coffee"
-    grunt.loadNpmTasks "grunt-concurrent"
-    grunt.loadNpmTasks "grunt-nodemon"
+    grunt.loadNpmTasks "grunt-exec"
 
-    grunt.registerTask "default", ["concurrent"]
+    grunt.registerTask "default", ["watch"]
 
     # for all at once compilation
     grunt.registerTask "coffee-compile", ["coffee:each"]
+    grunt.registerTask "start-tests", ["exec:start_tests"]
