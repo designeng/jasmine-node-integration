@@ -20,7 +20,6 @@
     root.When = ->
         mostRecentlyUsed = root.When
         b = getBlock(arguments)
-        console.log "BLOCK", b
         beforeEach ->
             whenList.push(b)
         afterEach ->

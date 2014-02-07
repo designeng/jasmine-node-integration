@@ -1,13 +1,10 @@
-(function() {
-  define(["backbone"], function(Backbone) {
-    var DropDownListModel;
-    DropDownListModel = Backbone.Model.extend({
-      defaults: {
-        display: false,
-        setFirstActive: true
-      }
-    });
-    return DropDownListModel;
+define(["backbone"], function(Backbone) {
+  var DropDownListModel;
+  DropDownListModel = Backbone.Model.extend({
+    defaults: {
+      display: false,
+      setFirstActive: true
+    }
   });
-
-}).call(this);
+  return DropDownListModel;
+});

@@ -13,6 +13,7 @@ define [
             return @moduleHash
 
         addModule: (data) ->
+            console.log "addModule >>>", data.module
             @moduleHash[data.name] = data.module
 
             # and resolve defferedObject[data.name]

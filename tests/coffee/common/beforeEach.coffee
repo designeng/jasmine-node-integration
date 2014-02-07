@@ -56,7 +56,7 @@ define [
 
         window.moduleHash = moduleHash
 
-        window.location.href = "/tests/#!/header"
+        # window.location.href = "/tests/#!/header"
 
         appStarted = true
 

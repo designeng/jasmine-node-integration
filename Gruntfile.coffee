@@ -1,9 +1,14 @@
 module.exports = (grunt) ->
+
+    port = 9001
   
     # Project configuration.
     grunt.initConfig
         watch:
-            coffee:
+            coffee_app:
+                files: ['app/coffee/**/**.coffee']
+                tasks: ["coffee-compile-app"]
+            coffee_tests:
                 files: ['tests/coffee/**/**.coffee']
                 # tasks: ['coffee-compile', "start-tests"]
                 tasks: ["coffee-compile-tests"]
@@ -24,6 +29,17 @@ module.exports = (grunt) ->
                     dest: 'tests/js',
                     ext: '.js'
                 ]
+            app:
+                options: {
+                    bare: true
+                }
+                files: [
+                    expand: true,
+                    cwd: 'app/coffee',
+                    src: ['**/*.coffee'],
+                    dest: 'app/js',
+                    ext: '.js'
+                ]
 
         insert:
             options: {}
@@ -35,8 +51,26 @@ module.exports = (grunt) ->
         connect:
             server:
                 options:
-                    port: 9001
+                    port: port
                     base: '.'
+            testUrls:
+                options:
+                    port: port,
+                    base: '.'
+
+        # mocha testUrls
+        mocha:
+            testUrls:
+                options:
+                    mocha:
+                        ignoreLeaks: false
+                        grep: 'food'
+
+                reporter: 'Nyan'
+
+                urls: ['http://localhost:' + port + '/mocha-test/test2.html'],
+
+                run: true
 
         exec:
             start_tests:
@@ -51,11 +85,15 @@ module.exports = (grunt) ->
     grunt.loadNpmTasks "grunt-exec"
     grunt.loadNpmTasks "grunt-newer"
     grunt.loadNpmTasks "grunt-insert"
+    grunt.loadNpmTasks "grunt-mocha"
 
     grunt.registerTask "default", ["connect:server", "watch"]
 
     # for all at once compilation
     grunt.registerTask "coffee-compile-tests", ["newer:coffee:tests"]
+    grunt.registerTask "coffee-compile-app", ["newer:coffee:app"]
     grunt.registerTask "start-tests", ["exec:start_tests"]
     grunt.registerTask "server", ["connect"]
     grunt.registerTask "inc", ["insert", "coffee-compile-tests", "default"]
+
+    grunt.registerTask 'testUrls', ['connect:testUrls', 'mocha:testUrls', 'watch']

@@ -21,6 +21,7 @@ define(["marionette", "when"], function(Marionette, When) {
     };
 
     ModuleHash.prototype.addModule = function(data) {
+      console.log("addModule >>>", data.module);
       this.moduleHash[data.name] = data.module;
       return this.defferedObject[data.name].resolve(data.module);
     };

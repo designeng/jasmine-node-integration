@@ -30,7 +30,6 @@ define(["marionette", "Handlebars", "appbootstrap", "moduleHash", "handlebarsHel
       routeMap: routeMap
     });
     window.moduleHash = moduleHash;
-    window.location.href = "/tests/#!/header";
     appStarted = true;
     return true;
   };
