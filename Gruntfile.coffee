@@ -4,16 +4,16 @@ module.exports = (grunt) ->
     grunt.initConfig
         watch:
             coffee:
-                files: ['tests/coffee/**.coffee']
+                files: ['tests/coffee/**/**.coffee']
                 # tasks: ['coffee-compile', "start-tests"]
-                tasks: ['coffee-compile', "start-tests"]
+                tasks: ["coffee-compile-tests"]
             js:
-                files: ['tests/js/**.js']
+                files: ['tests/js/**/**.js']
                 options:
                     livereload: 9000
 
         coffee:
-            each:
+            tests:
                 options: {
                     bare: true
                 }
@@ -24,6 +24,13 @@ module.exports = (grunt) ->
                     dest: 'tests/js',
                     ext: '.js'
                 ]
+
+        insert:
+            options: {}
+            main:
+                src: "app/coffee/requireConfig.coffee",
+                dest: "tests/coffee/SpecRunner.coffee",
+                match: "# requirejs-config here"
 
         connect:
             server:
@@ -42,10 +49,13 @@ module.exports = (grunt) ->
     grunt.loadNpmTasks "grunt-contrib-coffee"
     grunt.loadNpmTasks "grunt-contrib-connect"
     grunt.loadNpmTasks "grunt-exec"
+    grunt.loadNpmTasks "grunt-newer"
+    grunt.loadNpmTasks "grunt-insert"
 
     grunt.registerTask "default", ["connect:server", "watch"]
 
     # for all at once compilation
-    grunt.registerTask "coffee-compile", ["newer:coffee:each"]
+    grunt.registerTask "coffee-compile-tests", ["newer:coffee:tests"]
     grunt.registerTask "start-tests", ["exec:start_tests"]
     grunt.registerTask "server", ["connect"]
+    grunt.registerTask "inc", ["insert", "coffee-compile-tests", "default"]

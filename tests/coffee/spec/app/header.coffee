@@ -1,6 +1,7 @@
 define [
     "when"
-], (WhenP) ->
+    "moduleHash"
+], (WhenP, moduleHash) ->
 
     isFooterHash = false
 
@@ -80,10 +81,10 @@ define [
     #             expect(target).toBeDefined()
     #             done()
 
-
-    WhenP(moduleHash.getModuleAsPromise("header")).then (target) ->
-        console.log ">>>>", target
-        # expect(target).toBeDefined()
+    console.log moduleHash
+    # WhenP(moduleHash.getModuleAsPromise("header")).then (target) ->
+    #     console.log ">>>>>>>>>", target
+    #     # expect(target).toBeDefined()
 
 
             
