@@ -5,11 +5,12 @@ module.exports = (grunt) ->
         watch:
             coffee:
                 files: ['tests/coffee/**.coffee']
+                # tasks: ['coffee-compile', "start-tests"]
                 tasks: ['coffee-compile', "start-tests"]
             js:
                 files: ['tests/js/**.js']
                 options:
-                    livereload: true
+                    livereload: 9000
 
         coffee:
             each:
@@ -20,9 +21,15 @@ module.exports = (grunt) ->
                     expand: true,
                     cwd: 'tests/coffee',
                     src: ['**/*.coffee'],
-                    dest: 'tests/js/',
+                    dest: 'tests/js',
                     ext: '.js'
                 ]
+
+        connect:
+            server:
+                options:
+                    port: 9001
+                    base: '.'
 
         exec:
             start_tests:
@@ -33,10 +40,12 @@ module.exports = (grunt) ->
 
     grunt.loadNpmTasks "grunt-contrib-watch"
     grunt.loadNpmTasks "grunt-contrib-coffee"
+    grunt.loadNpmTasks "grunt-contrib-connect"
     grunt.loadNpmTasks "grunt-exec"
 
-    grunt.registerTask "default", ["watch"]
+    grunt.registerTask "default", ["connect:server", "watch"]
 
     # for all at once compilation
-    grunt.registerTask "coffee-compile", ["coffee:each"]
+    grunt.registerTask "coffee-compile", ["newer:coffee:each"]
     grunt.registerTask "start-tests", ["exec:start_tests"]
+    grunt.registerTask "server", ["connect"]
