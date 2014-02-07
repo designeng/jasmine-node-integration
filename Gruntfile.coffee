@@ -12,6 +12,9 @@ module.exports = (grunt) ->
                 files: ['tests/coffee/**/**.coffee']
                 # tasks: ['coffee-compile', "start-tests"]
                 tasks: ["coffee-compile-tests"]
+            coffee_mocha_tests:
+                files: ['mocha-tests/coffee/**/**.coffee']
+                tasks: ["coffee-compile-mocha-tests"]
             js:
                 files: ['tests/js/**/**.js']
                 options:
@@ -27,6 +30,17 @@ module.exports = (grunt) ->
                     cwd: 'tests/coffee',
                     src: ['**/*.coffee'],
                     dest: 'tests/js',
+                    ext: '.js'
+                ]
+            mocha_tests:
+                options: {
+                    bare: true
+                }
+                files: [
+                    expand: true,
+                    cwd: 'mocha-tests/coffee',
+                    src: ['**/*.coffee'],
+                    dest: 'mocha-tests/js',
                     ext: '.js'
                 ]
             app:
@@ -68,7 +82,7 @@ module.exports = (grunt) ->
 
                 reporter: 'Nyan'
 
-                urls: ['http://localhost:' + port + '/mocha-test/test2.html'],
+                urls: ['http://localhost:' + port + '/mocha-tests/test2.html'],
 
                 run: true
 
@@ -91,6 +105,7 @@ module.exports = (grunt) ->
 
     # for all at once compilation
     grunt.registerTask "coffee-compile-tests", ["newer:coffee:tests"]
+    grunt.registerTask "coffee-compile-mocha-tests", ["newer:coffee:mocha_tests"]
     grunt.registerTask "coffee-compile-app", ["newer:coffee:app"]
     grunt.registerTask "start-tests", ["exec:start_tests"]
     grunt.registerTask "server", ["connect"]

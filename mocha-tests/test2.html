@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>Example Mocha Test</title>
+    <link rel="stylesheet" href="css/mocha.css" type="text/css" charset="utf-8" />
+</head>
+<body>
+    <!-- Required for browser reporter -->
+    <div id="mocha"></div>
+
+    <!-- mocha -->
+    <script src="js/lib/mocha.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" charset="utf-8">
+        // This will be overridden by mocha-helper if you run with grunt
+        mocha.setup('bdd');
+    </script>
+
+    <!-- Include your assertion lib of choice -->
+    <script src="js/lib/chai.js" type="text/javascript" charset="utf-8"></script>
+
+    <script src="js/lib/jquery.min.js"></script>
+    <script src="js/lib/require.js" data-main="js/SpecRunner"></script>
+
+
+</body>
+</html>
