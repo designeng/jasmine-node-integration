@@ -249,12 +249,15 @@ require.config
 requirejs.s.contexts._.config["paths"]["jquery.simulate"] = "/tests/js/lib/jquery.simulate"
 requirejs.s.contexts._.config["paths"]["PromisesSrc"] = "/mocha-tests/js/temp-src/PromisesSrc"
 requirejs.s.contexts._.config["paths"]["DeffSrc"] = "/mocha-tests/js/temp-src/DeffSrc"
+
+requirejs.s.contexts._.config["paths"]["AppSpec"] = "/mocha-tests/js/common/AppSpec"
 #index.js - list with runing specs
 require [
     "jquery"
     "underscore"
     "when"
     "js/SpecIndex.js"
+    "/mocha-tests/js/common/before.js"    
 ], ($, _, WhenP, index) ->
 
     expect = chai.expect
@@ -265,7 +268,7 @@ require [
                     return spec = pathToSpec + spec + extention
                 )
 
-    console.log specs
+    console.log "SPECS:::", specs
 
     $ ->
         require specs, ->

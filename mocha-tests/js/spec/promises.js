@@ -1,7 +1,7 @@
 var __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-define(["when", "marionette", "PromisesSrc", "DeffSrc"], function(WhenP, Marionette, PromisesSrc, DeffSrc) {
+define(["when", "marionette", "AppSpec", "PromisesSrc", "DeffSrc"], function(WhenP, Marionette, appSpec, PromisesSrc, DeffSrc) {
   var TestTest, testInstanse, _ref;
   TestTest = (function(_super) {
     __extends(TestTest, _super);
@@ -12,29 +12,29 @@ define(["when", "marionette", "PromisesSrc", "DeffSrc"], function(WhenP, Marione
     }
 
     TestTest.prototype.initialize = function() {
+      appSpec.setSpec(this);
       return this.triggerMethod("init");
     };
 
     TestTest.prototype.onInit = function() {
       return describe("Apple", function() {
+        before(function() {
+          this.spec = appSpec.getSpec();
+          return this.prom = new DeffSrc();
+        });
+        after(function() {
+          delete this.spec;
+          return delete this.prom;
+        });
         this.timeout(5000);
-        When(function(done) {
-          var _this = this;
-          this.prom = new DeffSrc();
-          this.result = void 0;
-          return WhenP(this.prom).then(function(res) {
-            console.log("RES::::::", res);
-            _this.result = res;
-            return done();
-          }, function(err) {
-            console.log("ERR", err);
-            return done();
-          });
+        Given(function(done) {
+          return this.spec.setPromise(this.prom, this, "result", done);
         });
         Then(function() {
           return expect(this.result).to.be.a('object');
         });
         return And(function() {
+          console.log(this.result);
           return expect(this.result).property("one");
         });
       });

@@ -1,5 +1,5 @@
 define(function() {
   return {
-    specs: ["promises"]
+    specs: ["app-core-promises"]
   };
 });

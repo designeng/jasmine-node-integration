@@ -6,10 +6,11 @@ define(["when"], function(WhenP) {
   };
   DeffSrc = function() {
     var _this = this;
+    console.log("DeffSrc");
     def = WhenP.defer();
     setTimeout(function() {
       return def.resolve(obj);
-    }, 3000);
+    }, 400);
     return def.promise;
   };
   return DeffSrc;

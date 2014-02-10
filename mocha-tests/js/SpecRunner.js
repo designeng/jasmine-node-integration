@@ -182,7 +182,9 @@ requirejs.s.contexts._.config["paths"]["PromisesSrc"] = "/mocha-tests/js/temp-sr
 
 requirejs.s.contexts._.config["paths"]["DeffSrc"] = "/mocha-tests/js/temp-src/DeffSrc";
 
-require(["jquery", "underscore", "when", "js/SpecIndex.js"], function($, _, WhenP, index) {
+requirejs.s.contexts._.config["paths"]["AppSpec"] = "/mocha-tests/js/common/AppSpec";
+
+require(["jquery", "underscore", "when", "js/SpecIndex.js", "/mocha-tests/js/common/before.js"], function($, _, WhenP, index) {
   var expect, extention, pathToSpec, specs;
   expect = chai.expect;
   pathToSpec = "/mocha-tests/js/spec/";
@@ -190,7 +192,7 @@ require(["jquery", "underscore", "when", "js/SpecIndex.js"], function($, _, When
   specs = _.map(index.specs, function(spec) {
     return spec = pathToSpec + spec + extention;
   });
-  console.log(specs);
+  console.log("SPECS:::", specs);
   return $(function() {
     return require(specs, function() {
       window.expect = chai.expect;

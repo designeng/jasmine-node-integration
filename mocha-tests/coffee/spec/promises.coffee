@@ -1,36 +1,38 @@
 define [
 	"when"
     "marionette"
+    "AppSpec"
     "PromisesSrc"
 	"DeffSrc"
-], (WhenP, Marionette, PromisesSrc, DeffSrc) ->
+], (WhenP, Marionette, appSpec, PromisesSrc, DeffSrc) ->
 
     class TestTest extends Marionette.Controller
 
         initialize: ->
+            appSpec.setSpec @
             # do somth initialization work
             @triggerMethod "init"
 
         onInit: ->
             describe "Apple", ->
+
+                before ->
+                    @spec = appSpec.getSpec()
+                    @prom = new DeffSrc()
+
+                after ->
+                    delete @spec
+                    delete @prom
+
                 @.timeout(5000)
 
-                When (done) ->
-                    @prom = new DeffSrc()
-                    @result = undefined
-                    WhenP(@prom).then(
-                        (res) =>
-                            console.log "RES::::::", res
-                            @result = res
-                            done()
-                        (err) =>
-                            console.log "ERR", err
-                            done()
-                    )
+                Given (done) ->
+                    @spec.setPromise(@prom, @, "result", done)
 
                 Then ->
                     expect(@result).to.be.a('object')
                 And ->
+                    console.log @result
                     expect(@result).property "one"
 
 

@@ -8,6 +8,7 @@ define [
 	}
 
 	DeffSrc = () ->
+		console.log "DeffSrc"
 		def = WhenP.defer()
 
 		# $.ajax(
@@ -17,7 +18,7 @@ define [
 
 		setTimeout(()=>
 		    def.resolve(obj)
-		, 3000)
+		, 400)
 
 		return def.promise
 
