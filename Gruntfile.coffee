@@ -15,10 +15,14 @@ module.exports = (grunt) ->
             coffee_mocha_tests:
                 files: ['mocha-tests/coffee/**/**.coffee']
                 tasks: ["coffee-compile-mocha-tests"]
+            # js:
+            #     files: ['tests/js/**/**.js', 'mocha-tests/js/**/**.js', 'app/js/**/**.js']
+            #     options:
+            #         livereload: 9000
             js:
-                files: ['tests/js/**/**.js']
+                files: ['mocha-tests/js/**/**.js']
                 options:
-                    livereload: 9000
+                    livereload: true
 
         coffee:
             tests:

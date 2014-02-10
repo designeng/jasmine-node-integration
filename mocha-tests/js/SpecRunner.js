@@ -188,9 +188,10 @@ require(["jquery", "underscore", "when", "js/SpecIndex.js"], function($, _, When
   specs = _.map(index.specs, function(spec) {
     return spec = pathToSpec + spec + extention;
   });
+  console.log(specs);
   return $(function() {
     return require(specs, function() {
-      console.log("all loaded");
+      console.log("all <loaded:::></loaded:::>");
       window.expect = chai.expect;
       if (navigator.userAgent.indexOf('PhantomJS') < 0) {
         return mocha.run();

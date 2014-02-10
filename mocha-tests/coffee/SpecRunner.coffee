@@ -265,12 +265,14 @@ require [
                     return spec = pathToSpec + spec + extention
                 )
 
+    console.log specs
+
     $ ->
         # require [
-        #     "js/common/jasmine-given.js"
+        #     "js/common/mocha-given.js"
         # ], ->
         require specs, ->
-            console.log "all loaded"
+            console.log "all <loaded:::></loaded:::>"
 
             window.expect = chai.expect
 
