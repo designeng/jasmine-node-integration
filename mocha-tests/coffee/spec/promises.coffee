@@ -1,60 +1,40 @@
 define [
 	"when"
-	"PromisesSrc"
-], (WhenP, PromisesSrc) ->
+    "marionette"
+    "PromisesSrc"
+	"DeffSrc"
+], (WhenP, Marionette, PromisesSrc, DeffSrc) ->
 
-    class TestTest
-        constructor: ->
+    class TestTest extends Marionette.Controller
+
+        initialize: ->
+            # do somth initialization work
+            @triggerMethod "init"
+
+        onInit: ->
             describe "Apple", ->
-                beforeEach ->
-                    console.log "beforeEach"
-                    @prom = new PromisesSrc()
+                @.timeout(5000)
 
-                afterEach ->
-                    console.log "afterEach"
-                    delete @prom
+                When (done) ->
+                    @prom = new DeffSrc()
+                    @result = undefined
+                    WhenP(@prom).then(
+                        (res) =>
+                            console.log "RES::::::", res
+                            @result = res
+                            done()
+                        (err) =>
+                            console.log "ERR", err
+                            done()
+                    )
 
-                it "should", ->
-                    console.log @
-                    expect(@prom).property "one"
-
-                console.log "WITH", @
-
-                return
+                Then ->
+                    expect(@result).to.be.a('object')
+                And ->
+                    expect(@result).property "one"
 
 
     testInstanse = new TestTest()
 
-    console.log testInstanse
-
     return testInstanse
-
-
-
-    # prom = undefined
-    # console.log "PromisesSrc 1--- ", PromisesSrc
-    # describe "Apple", ->
-    # 	beforeEach ->
-    #         console.log "Promises", PromisesSrc
-    # 	    prom = new PromisesSrc()
-    # 	    console.log "@promises::::::", prom
-
-  	# 	afterEach ->
-   #  		delete prom
-
-  	# 	it "should", ->
-   #  		expect(@promises).property "_message"
-
-  	# 	it "should", (done) ->
-   #  		# @promises.then (
-   #  		# 	(res) ->
-   #  		# 		console.log "RES", res
-   #  		# 		done()
-   #  		# 	(err) ->
-   #  		# 		console.log "ERR", err
-   #  		# 		done()
-   #  		# )
-			# prom.then (res)->
-			# 	console.log res
-   #  			# done()
     		

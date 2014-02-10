@@ -248,6 +248,7 @@ require.config
 # and add to paths jquery.simulate
 requirejs.s.contexts._.config["paths"]["jquery.simulate"] = "/tests/js/lib/jquery.simulate"
 requirejs.s.contexts._.config["paths"]["PromisesSrc"] = "/mocha-tests/js/temp-src/PromisesSrc"
+requirejs.s.contexts._.config["paths"]["DeffSrc"] = "/mocha-tests/js/temp-src/DeffSrc"
 #index.js - list with runing specs
 require [
     "jquery"
@@ -258,7 +259,6 @@ require [
 
     expect = chai.expect
 
-
     pathToSpec = "/mocha-tests/js/spec/"
     extention = ".js"
     specs = _.map(index.specs, (spec) ->
@@ -268,14 +268,9 @@ require [
     console.log specs
 
     $ ->
-        # require [
-        #     "js/common/mocha-given.js"
-        # ], ->
         require specs, ->
-            console.log "all <loaded:::></loaded:::>"
 
             window.expect = chai.expect
-
 
             if navigator.userAgent.indexOf('PhantomJS') < 0
                 mocha.run()

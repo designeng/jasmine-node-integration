@@ -180,6 +180,8 @@ requirejs.s.contexts._.config["paths"]["jquery.simulate"] = "/tests/js/lib/jquer
 
 requirejs.s.contexts._.config["paths"]["PromisesSrc"] = "/mocha-tests/js/temp-src/PromisesSrc";
 
+requirejs.s.contexts._.config["paths"]["DeffSrc"] = "/mocha-tests/js/temp-src/DeffSrc";
+
 require(["jquery", "underscore", "when", "js/SpecIndex.js"], function($, _, WhenP, index) {
   var expect, extention, pathToSpec, specs;
   expect = chai.expect;
@@ -191,7 +193,6 @@ require(["jquery", "underscore", "when", "js/SpecIndex.js"], function($, _, When
   console.log(specs);
   return $(function() {
     return require(specs, function() {
-      console.log("all <loaded:::></loaded:::>");
       window.expect = chai.expect;
       if (navigator.userAgent.indexOf('PhantomJS') < 0) {
         return mocha.run();
