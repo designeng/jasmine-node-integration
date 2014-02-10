@@ -4,14 +4,12 @@ define(["when"], function(WhenP) {
     AppSpec.prototype.currentSpec = null;
 
     function AppSpec(spec) {
-      Mocha.AgentApp = {};
       this.currentSpec = spec;
     }
 
     AppSpec.prototype.setSpec = function(spec) {
       spec.setPromise = this.setPromise;
-      this.currentSpec = spec;
-      return this.onSpecSetted();
+      return this.currentSpec = spec;
     };
 
     AppSpec.prototype.getSpec = function() {
@@ -31,10 +29,6 @@ define(["when"], function(WhenP) {
         console.log("ERR", err);
         return doneFn();
       });
-    };
-
-    AppSpec.prototype.onSpecSetted = function() {
-      return Mocha.AgentApp.spec = this.currentSpec;
     };
 
     return AppSpec;

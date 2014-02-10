@@ -7,7 +7,7 @@ define [
     "moduleHash"
 ], (WhenP, Marionette, appSpec, PromisesSrc, DeffSrc, moduleHash) ->
 
-    class TestTest extends Marionette.Controller
+    class AppCorePromises extends Marionette.Controller
 
         initialize: ->
             # do somth initialization work
@@ -23,8 +23,7 @@ define [
             describe "Header", ->
 
                 before ->
-                    @spec = appSpec.getSpec()
-                    
+                    @spec = appSpec.getSpec()                    
 
                 after ->
                     @spec.triggerMethod "footer"
@@ -46,10 +45,8 @@ define [
         onFooter: ->
             describe "Footer", ->
 
-                before ->
-                    @spec = appSpec.getSpec()
-
                 after ->
+                    delete @spec
 
                 @.timeout(3000)
 
@@ -66,7 +63,7 @@ define [
                 And ->
                     expect(@result).property "triggerMethod"
 
-    testInstanse = new TestTest()
+    appCorePromises = new AppCorePromises()
 
-    return testInstanse
+    return appCorePromises
     		

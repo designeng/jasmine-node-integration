@@ -2,23 +2,23 @@ var __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
 define(["when", "marionette", "AppSpec", "PromisesSrc", "DeffSrc", "moduleHash"], function(WhenP, Marionette, appSpec, PromisesSrc, DeffSrc, moduleHash) {
-  var TestTest, testInstanse, _ref;
-  TestTest = (function(_super) {
-    __extends(TestTest, _super);
+  var AppCorePromises, appCorePromises, _ref;
+  AppCorePromises = (function(_super) {
+    __extends(AppCorePromises, _super);
 
-    function TestTest() {
-      _ref = TestTest.__super__.constructor.apply(this, arguments);
+    function AppCorePromises() {
+      _ref = AppCorePromises.__super__.constructor.apply(this, arguments);
       return _ref;
     }
 
-    TestTest.prototype.initialize = function() {
+    AppCorePromises.prototype.initialize = function() {
       appSpec.setSpec(this);
       this.headerPromise = moduleHash.getModuleAsPromise("header");
       this.footerPromise = moduleHash.getModuleAsPromise("footer");
       return this.triggerMethod("init");
     };
 
-    TestTest.prototype.onInit = function() {
+    AppCorePromises.prototype.onInit = function() {
       return describe("Header", function() {
         before(function() {
           return this.spec = appSpec.getSpec();
@@ -46,12 +46,11 @@ define(["when", "marionette", "AppSpec", "PromisesSrc", "DeffSrc", "moduleHash"]
       });
     };
 
-    TestTest.prototype.onFooter = function() {
+    AppCorePromises.prototype.onFooter = function() {
       return describe("Footer", function() {
-        before(function() {
-          return this.spec = appSpec.getSpec();
+        after(function() {
+          return delete this.spec;
         });
-        after(function() {});
         this.timeout(3000);
         Given(function(done) {
           return this.spec.setPromise(this.spec.footerPromise, this, "result", done);
@@ -74,9 +73,9 @@ define(["when", "marionette", "AppSpec", "PromisesSrc", "DeffSrc", "moduleHash"]
       });
     };
 
-    return TestTest;
+    return AppCorePromises;
 
   })(Marionette.Controller);
-  testInstanse = new TestTest();
-  return testInstanse;
+  appCorePromises = new AppCorePromises();
+  return appCorePromises;
 });
