@@ -1,0 +1,3 @@
+[submodule "mocha-tests/js/lib/wire"]
+	path = mocha-tests/js/lib/wire
+	url = https://github.com/cujojs/wire
