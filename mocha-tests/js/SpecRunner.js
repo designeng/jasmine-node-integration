@@ -1,6 +1,12 @@
 require.config({
   baseUrl: "/app/js",
-  packages: ["core"],
+  packages: [
+    "core", {
+      name: "wire",
+      main: "wire",
+      location: "../../../mocha-tests/js/lib/wire"
+    }
+  ],
   paths: {
     "jquery": "vendors/jquery.min",
     "jquery.ScrollTo": "vendors/jquery-scrollto",

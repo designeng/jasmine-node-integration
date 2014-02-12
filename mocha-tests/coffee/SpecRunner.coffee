@@ -5,7 +5,12 @@ require.config
     baseUrl: "/app/js"
 
     packages: [
-        "core"
+        "core",
+        {
+            name: "wire"
+            main: "wire"
+            location: "../../../mocha-tests/js/lib/wire"
+        }        
     ]
 
     paths:
@@ -251,6 +256,9 @@ requirejs.s.contexts._.config["paths"]["PromisesSrc"] = "/mocha-tests/js/temp-sr
 requirejs.s.contexts._.config["paths"]["DeffSrc"] = "/mocha-tests/js/temp-src/DeffSrc"
 
 requirejs.s.contexts._.config["paths"]["AppSpec"] = "/mocha-tests/js/common/AppSpec"
+
+# requirejs.s.contexts._.config["paths"]["wire"] = "/mocha-tests/js/lib/wire/wire"
+# requirejs.s.contexts._.config["paths"]["context"] = "/mocha-tests/js/lib/wire/lib/context"
 #index.js - list with runing specs
 require [
     "jquery"
