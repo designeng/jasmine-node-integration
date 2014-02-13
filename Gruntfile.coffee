@@ -105,7 +105,7 @@ module.exports = (grunt) ->
     grunt.loadNpmTasks "grunt-insert"
     grunt.loadNpmTasks "grunt-mocha"
 
-    grunt.registerTask "default", ["connect:server", "watch"]
+    grunt.registerTask "default", ["connect:server", "socket-bridge", "watch"]
 
     # for all at once compilation
     grunt.registerTask "coffee-compile-tests", ["newer:coffee:tests"]
@@ -116,3 +116,5 @@ module.exports = (grunt) ->
     grunt.registerTask "inc", ["insert", "coffee-compile-tests", "default"]
 
     grunt.registerTask 'testUrls', ['connect:testUrls', 'mocha:testUrls', 'watch']
+
+    grunt.task.loadTasks "tasks"

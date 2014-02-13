@@ -29,6 +29,7 @@ require.config({
     "superagent": "vendors/superagent",
     "bacon": "vendors/Bacon",
     "eventstreams": "vendors/backbone.eventstreams",
+    "sockjs": "vendors/sockjs-0.3",
     "when": "vendors/when/when",
     "function": "vendors/when/function",
     "callbacks": "vendors/when/callbacks",

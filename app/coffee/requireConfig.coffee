@@ -38,6 +38,9 @@ require.config
         
         "bacon"                         : "vendors/Bacon"
         "eventstreams"                  : "vendors/backbone.eventstreams"
+        
+        "sockjs"                        : "vendors/sockjs-0.3"
+
 
         # when with extentions
         "when"                          : "vendors/when/when"
