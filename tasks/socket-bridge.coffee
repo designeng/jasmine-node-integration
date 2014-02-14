@@ -18,14 +18,14 @@ module.exports = (grunt) ->
 		# 3. Usual http stuff
 		server = http.createServer()
 		server.addListener "request", (req, res) ->
-			res.header "Access-Control-Allow-Origin", "*"
+			res.setHeader "Access-Control-Allow-Origin", "*"
 			static_directory.serve req, res
 
 		server.addListener "upgrade", (req, res) ->
-		  	res.end()
+			res.end()
 
 		sockjs_echo.installHandlers server,
-		  	prefix: "/debug/tests/echo"
+		  	prefix: "/echo"
 
 		console.log " [*] Listening on 0.0.0.0:9123"
 		server.listen 9123, "0.0.0.0"

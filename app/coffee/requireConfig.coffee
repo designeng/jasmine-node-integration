@@ -177,6 +177,8 @@ require.config
         "flightSearchHistoryBarControl" : "controls/flightSearchHistoryBar/flightSearchHistoryBarControl"
         "linkFavoriteSearchControl"     : "controls/link/linkFavoriteSearchControl"
 
+        "socketFormControl"             : "controls/socketform/form"
+
         "flightSearchHeader"     : "modules/flightSearchHeader/flightSearchHeaderController"
 
         # filters

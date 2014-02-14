@@ -5,12 +5,15 @@ define [
 
     declaration =        
         componentItems: [
-                        {controlType: "infoControl", controlModel: new Backbone.Model
-                            cases:[
-                                {flightPointNotFound: "one"}
-                                {flightsNotFoundGotoSchedule: "two"}
-                                {test: "loc_Flight"}
-                                {support: "loc_SupportService"}
-                            ]
-                        }
+                        # {controlType: "infoControl", controlModel: new Backbone.Model
+                        #     cases:[
+                        #         {flightPointNotFound: "one"}
+                        #         {flightsNotFoundGotoSchedule: "two"}
+                        #         {test: "loc_Flight"}
+                        #         {support: "loc_SupportService"}
+                        #     ]
+                        # }
+
+                        # socketFormControl
+                        {controlType: "socketFormControl", controlModel: new Backbone.Model()}
                     ]        

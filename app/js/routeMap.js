@@ -12,8 +12,8 @@ define([], function() {
       "footer": []
     },
     "!/header": {
-      "header": ["header"],
-      "content": [],
+      "header": [],
+      "content": ["debug"],
       "footer": []
     },
     "!/flight-stats": {

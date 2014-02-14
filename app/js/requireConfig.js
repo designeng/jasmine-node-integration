@@ -106,6 +106,7 @@ require.config({
     "flightSearchHistoryController": "modules/flightSearchHistory/flightSearchHistoryController",
     "flightSearchHistoryBarControl": "controls/flightSearchHistoryBar/flightSearchHistoryBarControl",
     "linkFavoriteSearchControl": "controls/link/linkFavoriteSearchControl",
+    "socketFormControl": "controls/socketform/form",
     "flightSearchHeader": "modules/flightSearchHeader/flightSearchHeaderController",
     "filterListButton": "controls/filter/filterListButton",
     "filterButton": "controls/filter/filterButton",
