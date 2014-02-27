@@ -96,6 +96,34 @@ module.exports = (grunt) ->
                 stdout: true
                 stderr: true
 
+        requirejs:
+            compile:
+                options:
+                    baseUrl: 'app/js'
+                    name: 'fixtures/project'
+                    out: 'tmp/builded.js'
+                    include: ['tableControl']
+                    optimize: "none"
+                    mainConfigFile: 'app/js/requireConfig.js'
+                    findNestedDependencies: true
+                    # onBuildWrite: (moduleName, path, contents) ->
+                    #     console.log path
+                        # console.log "----------------------------"
+                        # console.log moduleName, path, contents
+                        # return contents.replace(/world/g, 'WORLD')
+
+        "requirejs-bundle":
+            # src: 'app/js/controls'
+            # dest: 'tmp/controls.js'
+            # options:
+            #     moduleName: 'my-controls'
+            #     baseUrl: 'app/js'
+            src: 'components'
+            dest: '_controls.js'
+            options:
+                moduleName: 'my-controls'
+                baseUrl: './'
+
 
     grunt.loadNpmTasks "grunt-contrib-watch"
     grunt.loadNpmTasks "grunt-contrib-coffee"
@@ -104,6 +132,8 @@ module.exports = (grunt) ->
     grunt.loadNpmTasks "grunt-newer"
     grunt.loadNpmTasks "grunt-insert"
     grunt.loadNpmTasks "grunt-mocha"
+    grunt.loadNpmTasks "grunt-contrib-requirejs"
+    grunt.loadNpmTasks "grunt-requirejs-bundle"
 
     grunt.registerTask "default", ["connect:server", "watch"]
 
@@ -114,5 +144,8 @@ module.exports = (grunt) ->
     grunt.registerTask "start-tests", ["exec:start_tests"]
     grunt.registerTask "server", ["connect"]
     grunt.registerTask "inc", ["insert", "coffee-compile-tests", "default"]
+    
+    grunt.registerTask "bundle", ["requirejs-bundle"]
+    grunt.registerTask "r", ["requirejs"]
 
     grunt.registerTask 'testUrls', ['connect:testUrls', 'mocha:testUrls', 'watch']

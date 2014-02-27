@@ -125,7 +125,11 @@ require.config({
     "sortedTableFilterContent": "modules/sortedTableFilterContent/sortedTableFilterContentController",
     "sortedTable": "modules/sortedTable/sortedTableController",
     "debug": "modules/debug/debugController",
-    "specReport": "modules/specReport/specReportController"
+    "specReport": "modules/specReport/specReportController",
+
+    "project": "fixtures/project",
+    "hello": "fixtures/hello",
+    "world": "fixtures/world"
   },
   shim: {
     marionette: ["backbone"],
@@ -175,3 +179,4 @@ require.config({
   },
   locale: "ru"
 });
+
